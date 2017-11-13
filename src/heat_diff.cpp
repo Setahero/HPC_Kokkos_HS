@@ -13,12 +13,11 @@ double dt = 0.05;	//Timestep
 int iteration = 5; 
 int x = 5;
 int y = 5;
+bool print = 0;
 
 std::vector<std::vector<double>> array;
 std::vector<std::vector<double>> array_new;
-/*double array[10][10]={{0.0}};
-double array_new[10][10]={{0.0}};
-*/
+
 //	For printing purpose	//
 
 template < typename T> void printVector(std::vector<std::vector<T> >myvec){ 
@@ -49,7 +48,6 @@ int checkBounds(int i){
 double computeNewNode(std::vector<std::vector<double>> arr, int i, int j){
 	double x = dx*dx;
 	double y = dy*dy;
-	//std::cout << i << " " << j << " "<< "\n";
 
 	return ((arr[checkBounds(i-1)][j] + arr[checkBounds(i+1)][j] - 2*arr[i][j])/
 		x) + ((arr[i][checkBounds(j-1)] + arr[i][checkBounds(j+1)] - 2*arr[i][j])/y);
@@ -63,30 +61,30 @@ int main(int argc, char* argv[])
     namespace po = boost::program_options;
     po::options_description desc("Allowed options");
     desc.add_options()
-                ("options,o", "Print this Message")
+                ("help,h", "Print this Message")
                 ("iteration,i", po::value<int>(&iteration), "Set Iterations, standart 5")
-                ("timestep, t", po::value<double>(&dt),"Set timestep, standart 0.05")
-                ("heattrans, h",po::value<double>(&k),"Set heattransfer coefficent, standart 1.0")
-                ("sizex, sx", po::value<int>(&x), "Set number of columns ")
-                ("sizey, sy", po::value<int>(&y), "Set number of rows")
+                ("timestep,t", po::value<double>(&dt),"Set timestep, standart 0.05")
+                ("heattrans,h",po::value<double>(&k),"Set heattransfer coefficent, standart 1.0")
+                ("sizex,x", po::value<int>(&x), "Set number of columns ")
+                ("sizey,y", po::value<int>(&y), "Set number of rows")
+                ("output,o", po::value<bool>(&print), "Display the Data")
                 ;
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);
     po::notify(vm);
 
-
-
-
     if(vm.count("help")) {
         std::cout << desc << "\n";
         return 1;
     }
 
-    //Setting the heat in the left corner
-
+    //	Initialize vectors	//
 	array=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
 	array_new=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
+
+    //	Setting the heat in the left corner	//
+
     for (size_t i = 1; i <= 1; ++i)
     {
     	for (size_t j = 1; j <= 1; ++j)
@@ -102,17 +100,14 @@ int main(int argc, char* argv[])
 
 	    for (int i = 0; i <= x-1; ++i)
 	    {
-	    	for (int j = 0; j <= x-1; ++j)
+	    	for (int j = 0; j <= y-1; ++j)
 	    	{
-
-	    		/*double dtheta = ((array[i-1][j] + array[i+1][j] - 2*array[i][j])/
-	    					dx*dx) + ((array[i][j-1] + array[i][j+1] - 
-	    					2*array[i][j])/dy*dy);
-	    		*/
 	    		array_new[i][j] = array[i][j] + k*computeNewNode(array,i,j)*dt;
 
 	    	}
 	    }
 	}
+	if(print != 0){
 	printVector(array_new);
+	}
 }
