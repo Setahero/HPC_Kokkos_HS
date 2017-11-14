@@ -24,14 +24,14 @@
 
 	//	Vectors for storing the heat-data	//
 
-	std::vector<std::vector<double>> array;
-	std::vector<std::vector<double>> array_new;
+	//std::vector<std::vector<double>> array;
+	//std::vector<std::vector<double>> array_new;
 
 	//	For printing purpose	//
 
 template < typename T> void printVector(std::vector<std::vector<T> >myvec){ 
-	for(int x=0; x<myvec.size();x++){ 
-		for(int y=0;y<myvec.at(x).size();y++){ 
+	for(auto x=0; x<myvec.size();x++){ 
+		for(auto y=0;y<myvec.at(x).size();y++){ 
 			std::cout << " " << myvec.at(x).at(y) << "  "; 
 		} 
 		std::cout << "\n"; 
@@ -42,7 +42,6 @@ template < typename T> void printVector(std::vector<std::vector<T> >myvec){
 
 int checkBounds(int i){
 
-	//std::cout << "$$ "<< i << " $$" << "\n";
 	if (i<0){
 		return x-1;
 	}else if (i==x)
@@ -71,29 +70,29 @@ int hpx_main(boost::program_options::variables_map& vm){
 
     //	Initialize vectors	//
 
-	array=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
-	array_new=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
+	std::vector<std::vector<double>> array(x,std::vector<double>(y,0.0));
+	std::vector<std::vector<double>> array_new(x,std::vector<double>(y,0.0));
 
     //	Setting the heat in the left corner	//
 
-    for (size_t i = 1; i <= 1; ++i)
+    for (auto i = 1; i <= 1; ++i)
     {
-    	for (size_t j = 1; j <= 1; ++j)
+    	for (auto j = 1; j <= 1; ++j)
     	{
     		array[i][j]=1.0;
     		array_new[i][j]=1.0;
     	}
     }
 
-	for (int i = 1; i <= iteration; ++i)
+	for (auto i = 1; i <= iteration; ++i)
 	{
 		//	Swapping vectors after each round of iteration 	//
 
 	    std::swap(array,array_new);
 
-	    for (int i = 0; i <= x-1; ++i)
+	    for (auto i = 0; i <= x-1; ++i)
 	    {
-	    	for (int j = 0; j <= y-1; ++j)
+	    	for (auto j = 0; j <= y-1; ++j)
 	    	{
 	    		array_new[i][j] = array[i][j] + k*computeNewNode(array,i,j)*dt;
 
@@ -103,11 +102,8 @@ int hpx_main(boost::program_options::variables_map& vm){
 
 	//	Calculating computing time 	//
 
-	std::uint64_t elapsed = hpx::util::high_resolution_clock::now() - past;
-
-	//	For big vectors i.e. 100*100, you should have the options to not //
-	//	print the data 													 //
-
+	std::uint64_t elapsed = hpx::util::high_resolution_clock::now() - past
+	
 	if(print != 0){
 	printVector(array_new);
 	std::cout << "\n";

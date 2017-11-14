@@ -15,14 +15,14 @@ int x = 5;
 int y = 5;
 bool print = 0;
 
-std::vector<std::vector<double>> array;
-std::vector<std::vector<double>> array_new;
+//std::vector<std::vector<double>> array;
+//std::vector<std::vector<double>> array_new;
 
 //	For printing purpose	//
 
 template < typename T> void printVector(std::vector<std::vector<T> >myvec){ 
-	for(int x=0; x<myvec.size();x++){ 
-		for(int y=0;y<myvec.at(x).size();y++){ 
+	for(auto x=0; x<myvec.size();x++){ 
+		for(auto y=0;y<myvec.at(x).size();y++){ 
 			std::cout << " " << myvec.at(x).at(y) << "  "; 
 		} 
 		std::cout << "\n"; 
@@ -86,27 +86,29 @@ int main(int argc, char* argv[])
     }
 
     //	Initialize vectors	//
-	array=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
-	array_new=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
+    
+
+	std::vector<std::vector<double>> array(x,std::vector<double>(y,0.0));
+	std::vector<std::vector<double>> array_new(x,std::vector<double>(y,0.0));
 
     //	Setting the heat in the left corner	//
 
-    for (size_t i = 1; i <= 1; ++i)
+    for (auto i = 1; i <= 1; ++i)
     {
-    	for (size_t j = 1; j <= 1; ++j)
+    	for (auto j = 1; j <= 1; ++j)
     	{
     		array[i][j]=1.0;
     		array_new[i][j]=1.0;
     	}
     }
 
-	for (int i = 1; i <= iteration; ++i)
+	for (auto i = 1; i <= iteration; ++i)
 	{
 	    std::swap(array,array_new);
 
-	    for (int i = 0; i <= x-1; ++i)
+	    for (auto i = 0; i <= x-1; ++i)
 	    {
-	    	for (int j = 0; j <= y-1; ++j)
+	    	for (auto j = 0; j <= y-1; ++j)
 	    	{
 	    		array_new[i][j] = array[i][j] + k*computeNewNode(array,i,j)*dt;
 
