@@ -5,26 +5,29 @@
 #include <hpx/hpx_init.hpp>
 #include <hpx/util/format.hpp>
 
+//	Must be always at the end, hpx-guideline	//
 
 #include <boost/program_options.hpp>
 
 
 
-//	Standard values, if not specified	//
+	//	Standard values, if not specified	//
 
 	double dx = 1.0;
 	double dy = 1.0;
-	double k = 1.0;		//Heattransfer Coefficient
-	double dt = 0.05;	//Timestep
+	double k = 1.0;		//	Heattransfer Coefficient //
+	double dt = 0.05;	//	timestep //
 	int iteration = 5; 
 	int x = 5;
 	int y = 5;
 	bool print = 0;
 
+	//	Vectors for storing the heat-data	//
+
 	std::vector<std::vector<double>> array;
 	std::vector<std::vector<double>> array_new;
 
-//	For printing purpose	//
+	//	For printing purpose	//
 
 template < typename T> void printVector(std::vector<std::vector<T> >myvec){ 
 	for(int x=0; x<myvec.size();x++){ 
@@ -35,7 +38,7 @@ template < typename T> void printVector(std::vector<std::vector<T> >myvec){
 	} 
 }
 
-//	Checking, if accesing out of bounds element	//
+	//	Checking, if accesing out of bounds element	//
 
 int checkBounds(int i){
 
@@ -49,7 +52,7 @@ int checkBounds(int i){
 	return i;
 }
 
-// 2D Stencil implementation	//
+	// 2D Stencil implementation	//
 
 double computeNewNode(std::vector<std::vector<double>> arr, int i, int j){
 	double x = dx*dx;
@@ -84,6 +87,8 @@ int hpx_main(boost::program_options::variables_map& vm){
 
 	for (int i = 1; i <= iteration; ++i)
 	{
+		//	Swapping vectors after each round of iteration 	//
+
 	    std::swap(array,array_new);
 
 	    for (int i = 0; i <= x-1; ++i)
@@ -95,16 +100,22 @@ int hpx_main(boost::program_options::variables_map& vm){
 	    	}
 	    }
 	}
+
+	//	Calculating computing time 	//
+
 	std::uint64_t elapsed = hpx::util::high_resolution_clock::now() - past;
+
+	//	For big vectors i.e. 100*100, you should have the options to not //
+	//	print the data 													 //
+
 	if(print != 0){
 	printVector(array_new);
-	std::cout << "\n\n\n";
+	std::cout << "\n";
+	}
 
-	//	14, round, diveded by 1e9, hpx uses hust a wrapper for boost::format	//
+	//	14, round, diveded by 1e9, hpx uses hust a wrapper for boost::format //
 	
 	hpx::util::format_to(std::cout, "%.14g" ,elapsed/1e9) << "\n";
-
-	}
 
 
     return hpx::finalize();
