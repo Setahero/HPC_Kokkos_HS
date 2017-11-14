@@ -2,23 +2,27 @@
 #include <iostream>
 #include <vector>
 #include <hpx/hpx.hpp>
+#include <hpx/hpx_init.hpp>
+#include <hpx/util/format.hpp>
+
+
 #include <boost/program_options.hpp>
 
 
 
 //	Standard values, if not specified	//
 
-double dx = 1.0;
-double dy = 1.0;
-double k = 1.0;		//Heattransfer Coefficient
-double dt = 0.05;	//Timestep
-int iteration = 5; 
-int x = 5;
-int y = 5;
-bool print = 0;
+	double dx = 1.0;
+	double dy = 1.0;
+	double k = 1.0;		//Heattransfer Coefficient
+	double dt = 0.05;	//Timestep
+	int iteration = 5; 
+	int x = 5;
+	int y = 5;
+	bool print = 0;
 
-std::vector<std::vector<double>> array;
-std::vector<std::vector<double>> array_new;
+	std::vector<std::vector<double>> array;
+	std::vector<std::vector<double>> array_new;
 
 //	For printing purpose	//
 
@@ -56,6 +60,55 @@ double computeNewNode(std::vector<std::vector<double>> arr, int i, int j){
 }
 
 
+int hpx_main(boost::program_options::variables_map& vm){
+
+	//	Setting clock for measurment	//
+
+    std::uint64_t past = hpx::util::high_resolution_clock::now();
+
+    //	Initialize vectors	//
+
+	array=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
+	array_new=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
+
+    //	Setting the heat in the left corner	//
+
+    for (size_t i = 1; i <= 1; ++i)
+    {
+    	for (size_t j = 1; j <= 1; ++j)
+    	{
+    		array[i][j]=1.0;
+    		array_new[i][j]=1.0;
+    	}
+    }
+
+	for (int i = 1; i <= iteration; ++i)
+	{
+	    std::swap(array,array_new);
+
+	    for (int i = 0; i <= x-1; ++i)
+	    {
+	    	for (int j = 0; j <= y-1; ++j)
+	    	{
+	    		array_new[i][j] = array[i][j] + k*computeNewNode(array,i,j)*dt;
+
+	    	}
+	    }
+	}
+	std::uint64_t elapsed = hpx::util::high_resolution_clock::now() - past;
+	if(print != 0){
+	printVector(array_new);
+	std::cout << "\n\n\n";
+
+	//	14, round, diveded by 1e9, hpx uses hust a wrapper for boost::format	//
+	
+	hpx::util::format_to(std::cout, "%.14g" ,elapsed/1e9) << "\n";
+
+	}
+
+
+    return hpx::finalize();
+}
 
 int main(int argc, char* argv[])
 {
@@ -87,35 +140,6 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    //	Initialize vectors	//
-	array=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
-	array_new=std::vector<std::vector<double>>(x,std::vector<double>(y,0.0));
 
-    //	Setting the heat in the left corner	//
-
-    for (size_t i = 1; i <= 1; ++i)
-    {
-    	for (size_t j = 1; j <= 1; ++j)
-    	{
-    		array[i][j]=1.0;
-    		array_new[i][j]=1.0;
-    	}
-    }
-
-	for (int i = 1; i <= iteration; ++i)
-	{
-	    std::swap(array,array_new);
-
-	    for (int i = 0; i <= x-1; ++i)
-	    {
-	    	for (int j = 0; j <= y-1; ++j)
-	    	{
-	    		array_new[i][j] = array[i][j] + k*computeNewNode(array,i,j)*dt;
-
-	    	}
-	    }
-	}
-	if(print != 0){
-	printVector(array_new);
-	}
+	return hpx::init(desc,argc, argv);
 }
