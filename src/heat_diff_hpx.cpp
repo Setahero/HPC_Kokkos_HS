@@ -4,10 +4,16 @@
 #include <hpx/hpx.hpp>
 #include <hpx/hpx_init.hpp>
 #include <hpx/util/format.hpp>
+#include <hpx/include/partitioned_vector.hpp>
+#include <hpx/runtime/find_localities.hpp>
+#include <hpx/parallel/algorithms/for_loop.hpp>
+#include <hpx/parallel/execution_policy.hpp>
+#include <hpx/exception_list.hpp>
 
 //	Must be always at the end, hpx-guideline	//
 
 #include <boost/program_options.hpp>
+
 
 
 
@@ -22,27 +28,22 @@
 	int y = 5;
 	bool print = 0;
 
-	//	Vectors for storing the heat-data	//
-
-	//std::vector<std::vector<double>> array;
-	//std::vector<std::vector<double>> array_new;
-
-	//	For printing purpose	//
-
 template < typename T> void printVector(std::vector<std::vector<T> >myvec){ 
 	for(auto x=0; x<myvec.size();x++){ 
-		for(auto y=0;y<myvec.at(x).size();y++){ 
-			std::cout << " " << myvec.at(x).at(y) << "  "; 
+		for(auto y=0;y<myvec.at(x).size();y++){
+			std::cout.precision(3); 
+			std::cout << myvec.at(x).at(y) << std::setw(5) << " "; 
 		} 
 		std::cout << "\n"; 
 	} 
 }
-
 	//	Checking, if accesing out of bounds element	//
 
 int checkBounds(int i){
 
 	if (i<0){
+//	std::cout << "Hallo " << i;
+//	std::cout << "\n " << x << "\n";
 		return x-1;
 	}else if (i==x)
 	{
@@ -57,15 +58,18 @@ double computeNewNode(std::vector<std::vector<double>> arr, int i, int j){
 	double x = dx*dx;
 	double y = dy*dy;
 
+//	std::cout << "i: " << i << " j: " << j;
+
 	return ((arr[checkBounds(i-1)][j] + arr[checkBounds(i+1)][j] - 2*arr[i][j])/
 		x) + ((arr[i][checkBounds(j-1)] + arr[i][checkBounds(j+1)] - 2*arr[i][j])/y);
 }
 
 
+//HPX_PLAIN_ACTION(computeNewNode, compute);
+
 int hpx_main(boost::program_options::variables_map& vm){
 
 	//	Setting clock for measurment	//
-
     std::uint64_t past = hpx::util::high_resolution_clock::now();
 
     //	Initialize vectors	//
@@ -84,6 +88,10 @@ int hpx_main(boost::program_options::variables_map& vm){
     	}
     }
 
+   // hpx::future<double> f;
+    hpx::parallel::execution::parallel_task_policy p;
+    hpx::exception_list e;
+    hpx::future<void> f;
 	for (auto i = 1; i <= iteration; ++i)
 	{
 		//	Swapping vectors after each round of iteration 	//
@@ -92,27 +100,29 @@ int hpx_main(boost::program_options::variables_map& vm){
 
 	    for (auto i = 0; i <= x-1; ++i)
 	    {
-	    	for (auto j = 0; j <= y-1; ++j)
-	    	{
-	    		array_new[i][j] = array[i][j] + k*computeNewNode(array,i,j)*dt;
 
-	    	}
+
+	    	f = hpx::parallel::v2::for_loop(
+	    		p, 0, y-1,
+	    		[&i, &array, &array_new] (int j){
+			array_new[i][j] = array[i][j] + computeNewNode(array,i,j)* dt * k;
+	    	});
+	    	f.get();
 	    }
 	}
 
 	//	Calculating computing time 	//
-
-	std::uint64_t elapsed = hpx::util::high_resolution_clock::now() - past
+	std::uint64_t elapsed = hpx::util::high_resolution_clock::now() - past;
 	
 	if(print != 0){
-	printVector(array_new);
+	printVector(array);
 	std::cout << "\n";
 	}
+
 
 	//	14, round, diveded by 1e9, hpx uses hust a wrapper for boost::format //
 	
 	hpx::util::format_to(std::cout, "%.14g" ,elapsed/1e9) << "\n";
-
 
     return hpx::finalize();
 }
