@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 #include <boost/program_options.hpp>
+#include "boost/date_time/posix_time/posix_time.hpp" 
+#include <chrono>
 
 
 //	Standard values, if not specified	//
@@ -92,6 +94,7 @@ int main(int argc, char* argv[])
 	std::vector<std::vector<double>> array_new(x,std::vector<double>(y,0.0));
 
     //	Setting the heat in the left corner	//
+	std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
 
     for (auto i = 1; i <= 1; ++i)
     {
@@ -104,7 +107,7 @@ int main(int argc, char* argv[])
 
 	for (auto i = 1; i <= iteration; ++i)
 	{
-	    std::swap(array,array_new);
+	    std::swap(*array,*array_new);
 
 	    for (auto i = 0; i <= x-1; ++i)
 	    {
@@ -115,6 +118,10 @@ int main(int argc, char* argv[])
 	    	}
 	    }
 	}
+	std::chrono::high_resolution_clock::time_point later = std::chrono::high_resolution_clock::now();
+
+	std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(later-now);
+	std::cout << time_span.count() << "\n";
 	if(print != 0){
 	printVector(array_new);
 	}

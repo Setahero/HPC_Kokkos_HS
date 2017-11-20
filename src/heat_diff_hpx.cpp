@@ -14,9 +14,6 @@
 
 #include <boost/program_options.hpp>
 
-
-
-
 	//	Standard values, if not specified	//
 
 	double dx = 1.0;
@@ -88,7 +85,6 @@ int hpx_main(boost::program_options::variables_map& vm){
     	}
     }
 
-   // hpx::future<double> f;
     hpx::parallel::execution::parallel_task_policy p;
     hpx::exception_list e;
     hpx::future<void> f;
@@ -100,8 +96,6 @@ int hpx_main(boost::program_options::variables_map& vm){
 
 	    for (auto i = 0; i <= x-1; ++i)
 	    {
-
-
 	    	f = hpx::parallel::v2::for_loop(
 	    		p, 0, y-1,
 	    		[&i, &array, &array_new] (int j){
@@ -136,7 +130,7 @@ int main(int argc, char* argv[])
                 ("help,h", "Print this Message")
                 ("iteration,i", po::value<int>(&iteration),
                  "Set Iterations, standart 5")
-                ("timestep,t", po::value<double>(&dt),
+                ("timestep,d", po::value<double>(&dt),
                  "Set timestep, standart 0.05")
                 ("heattrans,h",po::value<double>(&k),
                  "Set heattransfer coefficent, standart 1.0")
