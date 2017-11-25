@@ -8,6 +8,7 @@
 #include <hpx/runtime/find_localities.hpp>
 #include <hpx/parallel/algorithms/for_loop.hpp>
 #include <hpx/parallel/execution_policy.hpp>
+#include <hpx/parallel/algorithms/for_each.hpp>
 #include <hpx/exception_list.hpp>
 
 //	Must be always at the end, hpx-guideline	//
@@ -31,7 +32,7 @@ template < typename T> void printVector(std::vector<std::vector<T> >myvec){
 			std::cout.precision(3); 
 			std::cout << myvec.at(x).at(y) << std::setw(5) << " "; 
 		} 
-		std::cout << "\n"; 
+		//std::cout << "\n"; 
 	} 
 }
 	//	Checking, if accesing out of bounds element	//
@@ -92,8 +93,10 @@ int hpx_main(boost::program_options::variables_map& vm){
 
 	    std::swap(array,array_new);
 
+
 	    for (auto i = 0; i <= x-1; ++i)
 	    {
+
 	    	f = hpx::parallel::v2::for_loop(
 	    		p, 0, y,
 	    		[&i, &array, &array_new] (int j){

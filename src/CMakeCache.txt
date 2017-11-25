@@ -343,6 +343,8 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 HPX_EXPORT_TARGETS:INTERNAL=
 //Sources for libheat_executable.
 heat_executable_SOURCES:INTERNAL=/home/andrey/Schreibtisch/Wärmeleitgleichung/src/heat_diff_hpx.cpp
+//Sources for libheat_v2_executable.
+heat_v2_executable_SOURCES:INTERNAL=/home/andrey/Schreibtisch/Wärmeleitgleichung/src/heat_diff_hpx_v2.cpp
 //Sources for libhello_world_executable.
 hello_world_executable_SOURCES:INTERNAL=/home/andrey/Schreibtisch/Wärmeleitgleichung/src/heat_diff_hpx.cpp
 

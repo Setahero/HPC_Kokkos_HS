@@ -9,13 +9,11 @@ find_package(HPX REQUIRED)
 # build your application using HPX
 add_hpx_executable(heat
     ESSENTIAL
-    SOURCES heat_diff_hpx.cpp)
+    SOURCES heat_diff_hpx.cpp
+    )
+add_hpx_executable(heat_v2
+    ESSENTIAL
+    SOURCES heat_diff_hpx_v2.cpp
+    )
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native")
 
-
-#include_directories(/home/andrey/Schreibtisch/HauptS/hpx/include/hpx)
-#link_directories(/home/andrey/Schreibtisch/HauptS/hpx/lib)
-
-#set(CMAKE_BINARY_DIR ./)
-#set(EXECUTABLE_OUTPUT_PATH ./)
-#set(LIBRARY_OUTPUT_PATH ./)
-#add_executable(heat ./heat_diff_hpx.cpp)

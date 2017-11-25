@@ -89,16 +89,16 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
 
-# Special rule for the target install/strip
-install/strip/fast: install/strip
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
 
-.PHONY : install/strip/fast
+.PHONY : edit_cache/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -111,16 +111,16 @@ install/local/fast: install/local
 
 .PHONY : install/local/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
 
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
+# Special rule for the target install/strip
+install/strip/fast: install/strip
 
-.PHONY : edit_cache/fast
+.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -153,6 +153,19 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named heat_v2_exe
+
+# Build rule for target.
+heat_v2_exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 heat_v2_exe
+.PHONY : heat_v2_exe
+
+# fast build rule for target.
+heat_v2_exe/fast:
+	$(MAKE) -f CMakeFiles/heat_v2_exe.dir/build.make CMakeFiles/heat_v2_exe.dir/build
+.PHONY : heat_v2_exe/fast
 
 #=============================================================================
 # Target rules for targets named heat_exe
@@ -194,6 +207,33 @@ heat_diff_hpx.cpp.s:
 	$(MAKE) -f CMakeFiles/heat_exe.dir/build.make CMakeFiles/heat_exe.dir/heat_diff_hpx.cpp.s
 .PHONY : heat_diff_hpx.cpp.s
 
+heat_diff_hpx_v2.o: heat_diff_hpx_v2.cpp.o
+
+.PHONY : heat_diff_hpx_v2.o
+
+# target to build an object file
+heat_diff_hpx_v2.cpp.o:
+	$(MAKE) -f CMakeFiles/heat_v2_exe.dir/build.make CMakeFiles/heat_v2_exe.dir/heat_diff_hpx_v2.cpp.o
+.PHONY : heat_diff_hpx_v2.cpp.o
+
+heat_diff_hpx_v2.i: heat_diff_hpx_v2.cpp.i
+
+.PHONY : heat_diff_hpx_v2.i
+
+# target to preprocess a source file
+heat_diff_hpx_v2.cpp.i:
+	$(MAKE) -f CMakeFiles/heat_v2_exe.dir/build.make CMakeFiles/heat_v2_exe.dir/heat_diff_hpx_v2.cpp.i
+.PHONY : heat_diff_hpx_v2.cpp.i
+
+heat_diff_hpx_v2.s: heat_diff_hpx_v2.cpp.s
+
+.PHONY : heat_diff_hpx_v2.s
+
+# target to generate assembly for a file
+heat_diff_hpx_v2.cpp.s:
+	$(MAKE) -f CMakeFiles/heat_v2_exe.dir/build.make CMakeFiles/heat_v2_exe.dir/heat_diff_hpx_v2.cpp.s
+.PHONY : heat_diff_hpx_v2.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -203,13 +243,17 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... heat_exe"
-	@echo "... install/strip"
-	@echo "... install/local"
 	@echo "... edit_cache"
+	@echo "... heat_v2_exe"
+	@echo "... heat_exe"
+	@echo "... install/local"
+	@echo "... install/strip"
 	@echo "... heat_diff_hpx.o"
 	@echo "... heat_diff_hpx.i"
 	@echo "... heat_diff_hpx.s"
+	@echo "... heat_diff_hpx_v2.o"
+	@echo "... heat_diff_hpx_v2.i"
+	@echo "... heat_diff_hpx_v2.s"
 .PHONY : help
 
 
