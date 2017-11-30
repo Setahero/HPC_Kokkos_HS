@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/heat_exe.dir/heat_diff_hpx.cpp.o"
   "heat.pdb"
   "heat"
+  "heat.pdb"
+  "CMakeFiles/CMakeRelink.dir/heat"
 )
 
 # Per-language clean rules from dependency scanning.

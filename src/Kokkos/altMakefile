@@ -1,0 +1,21 @@
+CXX=g++
+default: heat_diff
+	KOKKOS_SETTINGS=KOKKOS_SRC_PATH=/home/andrey/Schreibtisch/Kokkos/kokkos/core/src 
+	#GTEST_PATH=/home/andrey/Schreibtisch/Kokkos/kokkos/tpls/gtest 
+	#echo $(KOKKOS_PATH)/Makefile.kokkos
+vpath %.cpp $(sort $(dir $(SRC)))
+include /home/andrey/Schreibtisch/build_kokkos/Makefile.kokkos
+INCLUDE = -I/home/andrey/Schreibtisch/Kokkos/kokkos/core/src -I ./ -lboost_program_options
+
+
+#CXXFLAGS+=$(INCLUDE)
+LINK = ${CXX}
+EXE = heat
+DEPFLAGS = -M
+
+$(EXE): $(OBJ) $(KOKKOS_LINK_DEPENDS)
+	$(LINK) $(KOKKOS_LDFLAGS) $(LINKFLAGS) $(EXTRA_PATH) $(OBJ) $(KOKKOS_LIBS) $(LIB) -o $(EXE
+#include Makefile.kokkos
+main: $(KOKKOS_LINK_DEPENDS ) $(KOKKOS_CPP_DEPENDS) heat_diff.cpp
+	$(CXX) $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) \
+	$(KOKKOS_LDFLAGS) $(KOKKOS_LIBS) heat_diff.cpp -o heat 

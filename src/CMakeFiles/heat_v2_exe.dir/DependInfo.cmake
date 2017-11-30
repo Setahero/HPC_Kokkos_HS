@@ -13,14 +13,16 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "HPX_APPLICATION_EXPORTS"
   "HPX_APPLICATION_NAME=heat_v2_exe"
   "HPX_APPLICATION_STRING=\"heat_v2_exe\""
-  "HPX_PREFIX=\"/home/andrey/Schreibtisch/HauptS/hpx\""
+  "HPX_PREFIX=\"/home/andrey/Schreibtisch/HauptS/my_hpx_build\""
   )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/andrey/Schreibtisch/HauptS/hpx/include"
-  "/home/andrey/Schreibtisch/HauptS/hpx/include/hpx/external"
-  "/home/andrey/Schreibtisch/hwloc/hwloc/include"
+  "/home/andrey/Schreibtisch/HauptS/hpx"
+  "/home/andrey/Schreibtisch/HauptS/my_hpx_build"
+  "/home/andrey/Schreibtisch/HauptS/hpx/examples"
+  "/home/andrey/Schreibtisch/HauptS/hpx/tests"
+  "/usr/local/include"
   )
 
 # Targets to which this target links.

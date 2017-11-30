@@ -5,6 +5,9 @@
 #include "boost/date_time/posix_time/posix_time.hpp" 
 #include <chrono>
 
+#include <Kokkos_Core.hpp>
+
+
 
 //	Standard values, if not specified	//
 
@@ -21,15 +24,17 @@ bool print = 0;
 //std::vector<std::vector<double>> array_new;
 
 //	For printing purpose	//
-
-template < typename T> void printVector(std::vector<std::vector<T> >myvec){ 
-	for(auto x=0; x<myvec.size();x++){ 
-		for(auto y=0;y<myvec.at(x).size();y++){ 
-			std::cout << " " << myvec.at(x).at(y) << "  "; 
+typedef Kokkos::View<double**>   ViewMatrixType;
+/*template < typename T> void printVector(ViewMatrixType< T > myvec){ 
+	for(auto x=0; x<10 ;x++){ 
+		for(auto y=0; y<10 ;y++){ 
+			std::cout << " " << myvec(x,y) << "  "; 
 		} 
 		std::cout << "\n"; 
 	} 
 }
+*/
+
 
 //	Checking, if accesing out of bounds element	//
 
@@ -47,12 +52,12 @@ int checkBounds(int i){
 
 // 2D Stencil implementation	//
 
-double computeNewNode(std::vector<std::vector<double>> arr, int i, int j){
+double computeNewNode(ViewMatrixType arr, int i, int j){
 	double x = dx*dx;
 	double y = dy*dy;
 
-	return ((arr[checkBounds(i-1)][j] + arr[checkBounds(i+1)][j] - 2*arr[i][j])/
-		x) + ((arr[i][checkBounds(j-1)] + arr[i][checkBounds(j+1)] - 2*arr[i][j])/y);
+	return ((arr(checkBounds(i-1),j) + arr(checkBounds(i+1), j) - 2*arr( i , j))/
+		x) + ((arr( i , checkBounds(j-1)) + arr(i , checkBounds(j+1)) - 2*arr( i , j ))/y);
 }
 
 
@@ -87,21 +92,30 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+   Kokkos::initialize(argc,argv);
     //	Initialize vectors	//
     
 
-	std::vector<std::vector<double>> array(x,std::vector<double>(y,0.0));
-	std::vector<std::vector<double>> array_new(x,std::vector<double>(y,0.0));
+	//std::vector<std::vector<double>> array(x,std::vector<double>(y,0.0));
+	//std::vector<std::vector<double>> array_new(x,std::vector<double>(y,0.0));
+
+
+
+    ViewMatrixType array_new("array_new",x, y);
+    ViewMatrixType array("array",x, y);
+
+
+
 
     //	Setting the heat in the left corner	//
 	std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
 
-    for (auto i = 1; i <= 1; ++i)
+    for (int i = 1; i <= 1; ++i)
     {
-    	for (auto j = 1; j <= 1; ++j)
+    	for (int j = 1; j <= 1; ++j)
     	{
-    		array[i][j]=1.0;
-    		array_new[i][j]=1.0;
+    		array( i , j ) = 1;
+    		array_new( i , j )=1.0;
     	}
     }
 
@@ -111,18 +125,28 @@ int main(int argc, char* argv[])
 
 	    for (auto i = 0; i <= x-1; ++i)
 	    {
-	    	for (auto j = 0; j <= y-1; ++j)
+	    	Kokkos::parallel_for(y, [i, &array_new, &array] (int j)
 	    	{
-	    		array_new[i][j] = array[i][j] + k*computeNewNode(array,i,j)*dt;
+	    		array_new( i , j )=array( i , j ) + k*computeNewNode(array,i,j)*dt;
 
-	    	}
-	    }
+	    	});
+		}
 	}
 	std::chrono::high_resolution_clock::time_point later = std::chrono::high_resolution_clock::now();
 
 	std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(later-now);
 	std::cout << time_span.count() << "\n";
 	if(print != 0){
-	printVector(array_new);
+	for (int i = 0; i < x; ++i)
+	{
+		for (int j = 0; j < y; ++j)
+		{
+			std::cout.precision(3);
+			std::cout << " " << array_new(i,j) << std::setw(5) <<" ";
+		}
+				std::cout << "\n"; 
 	}
+	}
+
+	Kokkos::finalize();
 }
