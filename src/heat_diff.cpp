@@ -22,7 +22,7 @@ bool print = 0;
 
 //	For printing purpose	//
 
-template < typename T> void printVector(std::vector<std::vector<T> >myvec){ 
+template < typename T> void printVector(std::vector<std::vector<T> >& myvec){ 
 	for(auto x=0; x<myvec.size();x++){ 
 		for(auto y=0;y<myvec.at(x).size();y++){ 
 			std::cout << " " << myvec.at(x).at(y) << "  "; 
@@ -47,7 +47,7 @@ int checkBounds(int i){
 
 // 2D Stencil implementation	//
 
-double computeNewNode(std::vector<std::vector<double>> arr, int i, int j){
+double computeNewNode(std::vector<std::vector<double>>& arr, int i, int j){
 	double x = dx*dx;
 	double y = dy*dy;
 

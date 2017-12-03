@@ -18,6 +18,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/usr/local/cuda-9.0/include"
   "/home/andrey/Schreibtisch/HauptS/hpx"
   "/home/andrey/Schreibtisch/HauptS/my_hpx_build"
   "/home/andrey/Schreibtisch/HauptS/hpx/examples"

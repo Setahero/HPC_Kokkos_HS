@@ -25,7 +25,7 @@
 	int y = 5;
 	bool print = 0;
 
-template < typename T> void printVector(std::vector<std::vector<T> >myvec){ 
+template < typename T> void printVector(std::vector<std::vector<T> >& myvec){ 
 	for(auto x=0; x<myvec.size();x++){ 
 		for(auto y=0;y<myvec.at(x).size();y++){
 			std::cout.precision(3); 
@@ -49,7 +49,7 @@ int checkBounds(int i){
 
 	// 2D Stencil implementation	//
 
-double computeNewNode(std::vector<std::vector<double>> arr, int i, int j){
+double computeNewNode(std::vector<std::vector<double>>& arr, int i, int j){
 	double x = dx*dx;
 	double y = dy*dy;
 
@@ -61,9 +61,6 @@ double computeNewNode(std::vector<std::vector<double>> arr, int i, int j){
 //HPX_PLAIN_ACTION(computeNewNode, compute);
 
 int hpx_main(boost::program_options::variables_map& vm){
-
-	//	Setting clock for measurment	//
-    std::uint64_t past = hpx::util::high_resolution_clock::now();
 
     //	Initialize vectors	//
 
@@ -82,10 +79,13 @@ int hpx_main(boost::program_options::variables_map& vm){
     }
 
     hpx::parallel::execution::parallel_task_policy p;
-	//hpx::parallel::v1::parallel_vector_execution_policy p;
 
     hpx::exception_list e;
     hpx::future<void> f;
+    
+	//	Setting clock for measurment	//
+    std::uint64_t past = hpx::util::high_resolution_clock::now();
+
 	for (auto i = 1; i <= iteration; ++i)
 	{
 		//	Swapping vectors after each round of iteration 	//

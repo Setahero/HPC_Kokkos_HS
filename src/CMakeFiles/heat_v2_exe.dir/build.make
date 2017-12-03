@@ -18,6 +18,9 @@ SUFFIXES =
 .SUFFIXES: .hpux_make_needs_suffix_list
 
 
+# Produce verbose output by default.
+VERBOSE = 1
+
 # Suppress display of executed commands.
 $(VERBOSE).SILENT:
 
@@ -90,6 +93,8 @@ heat_v2_exe_EXTERNAL_OBJECTS =
 
 heat_v2: CMakeFiles/heat_v2_exe.dir/heat_diff_hpx_v2.cpp.o
 heat_v2: CMakeFiles/heat_v2_exe.dir/build.make
+heat_v2: /usr/local/cuda-9.0/lib64/libcudart_static.a
+heat_v2: /usr/lib/x86_64-linux-gnu/librt.so
 heat_v2: /home/andrey/Schreibtisch/HauptS/my_hpx_build/lib/libhpx_init.a
 heat_v2: /home/andrey/Schreibtisch/HauptS/my_hpx_build/lib/libhpx.so.1.1.0
 heat_v2: /home/andrey/Schreibtisch/HauptS/my_hpx_build/lib/libhpx_init.a
@@ -106,9 +111,12 @@ heat_v2: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 heat_v2: /usr/lib/x86_64-linux-gnu/libboost_system.so
 heat_v2: /usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so
 heat_v2: /usr/local/lib/libhwloc.so
+heat_v2: /usr/local/cuda-9.0/lib64/libcudart_static.a
+heat_v2: /usr/lib/x86_64-linux-gnu/librt.so
 heat_v2: /usr/lib/x86_64-linux-gnu/libpthread.so
 heat_v2: /usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so
 heat_v2: /usr/local/lib/libhwloc.so
+heat_v2: /usr/local/cuda-9.0/lib64/libcudadevrt.a
 heat_v2: CMakeFiles/heat_v2_exe.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable heat_v2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/heat_v2_exe.dir/link.txt --verbose=$(VERBOSE)
@@ -127,6 +135,8 @@ heat_v2_exe_EXTERNAL_OBJECTS =
 
 CMakeFiles/CMakeRelink.dir/heat_v2: CMakeFiles/heat_v2_exe.dir/heat_diff_hpx_v2.cpp.o
 CMakeFiles/CMakeRelink.dir/heat_v2: CMakeFiles/heat_v2_exe.dir/build.make
+CMakeFiles/CMakeRelink.dir/heat_v2: /usr/local/cuda-9.0/lib64/libcudart_static.a
+CMakeFiles/CMakeRelink.dir/heat_v2: /usr/lib/x86_64-linux-gnu/librt.so
 CMakeFiles/CMakeRelink.dir/heat_v2: /home/andrey/Schreibtisch/HauptS/my_hpx_build/lib/libhpx_init.a
 CMakeFiles/CMakeRelink.dir/heat_v2: /home/andrey/Schreibtisch/HauptS/my_hpx_build/lib/libhpx.so.1.1.0
 CMakeFiles/CMakeRelink.dir/heat_v2: /home/andrey/Schreibtisch/HauptS/my_hpx_build/lib/libhpx_init.a
@@ -143,9 +153,12 @@ CMakeFiles/CMakeRelink.dir/heat_v2: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 CMakeFiles/CMakeRelink.dir/heat_v2: /usr/lib/x86_64-linux-gnu/libboost_system.so
 CMakeFiles/CMakeRelink.dir/heat_v2: /usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so
 CMakeFiles/CMakeRelink.dir/heat_v2: /usr/local/lib/libhwloc.so
+CMakeFiles/CMakeRelink.dir/heat_v2: /usr/local/cuda-9.0/lib64/libcudart_static.a
+CMakeFiles/CMakeRelink.dir/heat_v2: /usr/lib/x86_64-linux-gnu/librt.so
 CMakeFiles/CMakeRelink.dir/heat_v2: /usr/lib/x86_64-linux-gnu/libpthread.so
 CMakeFiles/CMakeRelink.dir/heat_v2: /usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so
 CMakeFiles/CMakeRelink.dir/heat_v2: /usr/local/lib/libhwloc.so
+CMakeFiles/CMakeRelink.dir/heat_v2: /usr/local/cuda-9.0/lib64/libcudadevrt.a
 CMakeFiles/CMakeRelink.dir/heat_v2: CMakeFiles/heat_v2_exe.dir/relink.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable CMakeFiles/CMakeRelink.dir/heat_v2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/heat_v2_exe.dir/relink.txt --verbose=$(VERBOSE)

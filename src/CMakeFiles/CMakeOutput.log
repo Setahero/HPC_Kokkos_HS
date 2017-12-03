@@ -1140,3 +1140,59 @@ make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeF
     Feature record: C_FEATURE:0c_restrict
     Feature record: C_FEATURE:0c_static_assert
     Feature record: C_FEATURE:0c_variadic_macros
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_14510/fast"
+/usr/bin/make -f CMakeFiles/cmTC_14510.dir/build.make CMakeFiles/cmTC_14510.dir/build
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_14510.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -fPIC    -o CMakeFiles/cmTC_14510.dir/CheckIncludeFile.c.o   -c /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_14510
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_14510.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC     CMakeFiles/cmTC_14510.dir/CheckIncludeFile.c.o  -o cmTC_14510 -rdynamic 
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird verlassen
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ff279/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ff279.dir/build.make CMakeFiles/cmTC_ff279.dir/build
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_ff279.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_ff279.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ff279
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ff279.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_ff279.dir/CheckFunctionExists.c.o  -o cmTC_ff279 -rdynamic -lpthread 
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird verlassen
+
+
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_82c4e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_82c4e.dir/build.make CMakeFiles/cmTC_82c4e.dir/build
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_82c4e.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -fPIC    -o CMakeFiles/cmTC_82c4e.dir/CheckIncludeFile.c.o   -c /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_82c4e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_82c4e.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC     CMakeFiles/cmTC_82c4e.dir/CheckIncludeFile.c.o  -o cmTC_82c4e -rdynamic 
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird verlassen
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4cc72/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4cc72.dir/build.make CMakeFiles/cmTC_4cc72.dir/build
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_4cc72.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_4cc72.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4cc72
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4cc72.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_4cc72.dir/CheckFunctionExists.c.o  -o cmTC_4cc72 -rdynamic -lpthread 
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird verlassen
+
+

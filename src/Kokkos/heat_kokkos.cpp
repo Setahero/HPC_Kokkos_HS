@@ -52,7 +52,7 @@ int checkBounds(int i){
 
 // 2D Stencil implementation	//
 
-double computeNewNode(ViewMatrixType arr, int i, int j){
+double computeNewNode(ViewMatrixType& arr, int i, int j){
 	double x = dx*dx;
 	double y = dy*dy;
 
@@ -84,14 +84,16 @@ int main(int argc, char* argv[])
                 ;
 
     po::variables_map vm;
-    po::store(po::parse_command_line(argc, argv, desc), vm);
+    po::parsed_options parsed = 
+    po::command_line_parser(argc, argv).options(desc).allow_unregistered().run();
+    po::store(parsed, vm);
     po::notify(vm);
 
-    if(vm.count("help")) {
+    /*if(vm.count("help")) {
         std::cout << desc << "\n";
         return 1;
     }
-
+	*/
    Kokkos::initialize(argc,argv);
     //	Initialize vectors	//
     
@@ -135,7 +137,6 @@ int main(int argc, char* argv[])
 	std::chrono::high_resolution_clock::time_point later = std::chrono::high_resolution_clock::now();
 
 	std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(later-now);
-	std::cout << time_span.count() << "\n";
 	if(print != 0){
 	for (int i = 0; i < x; ++i)
 	{
@@ -147,6 +148,6 @@ int main(int argc, char* argv[])
 				std::cout << "\n"; 
 	}
 	}
-
+	std::cout << time_span.count() << "\n";
 	Kokkos::finalize();
 }

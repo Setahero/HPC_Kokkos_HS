@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8.4 FATAL_ERROR)
 
 # This project is C++ based.
 project(your_app CXX)
+set (CMAKE_CXX_FLAGS "-march=native -O3")
+set (CMAKE_PREFIX_PATH "/home/andrey/Schreibtisch/HauptS/my_hpx_build")
 
 # Instruct cmake to find the HPX settings
 find_package(HPX)

@@ -1,0 +1,110 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_35343/fast"
+/usr/bin/make -f CMakeFiles/cmTC_35343.dir/build.make CMakeFiles/cmTC_35343.dir/build
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_35343.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -fPIC    -o CMakeFiles/cmTC_35343.dir/CheckSymbolExists.c.o   -c /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_35343
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_35343.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC     CMakeFiles/cmTC_35343.dir/CheckSymbolExists.c.o  -o cmTC_35343 -rdynamic 
+CMakeFiles/cmTC_35343.dir/CheckSymbolExists.c.o: In Funktion `main':
+CheckSymbolExists.c:(.text+0x1b): Nicht definierter Verweis auf `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_35343.dir/build.make:97: die Regel für Ziel „cmTC_35343“ scheiterte
+make[1]: *** [cmTC_35343] Fehler 1
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird verlassen
+Makefile:126: die Regel für Ziel „cmTC_35343/fast“ scheiterte
+make: *** [cmTC_35343/fast] Fehler 2
+
+File /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_60c57/fast"
+/usr/bin/make -f CMakeFiles/cmTC_60c57.dir/build.make CMakeFiles/cmTC_60c57.dir/build
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_60c57.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_60c57.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_60c57
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_60c57.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_60c57.dir/CheckFunctionExists.c.o  -o cmTC_60c57 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_60c57.dir/build.make:97: die Regel für Ziel „cmTC_60c57“ scheiterte
+make[1]: *** [cmTC_60c57] Fehler 1
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird verlassen
+Makefile:126: die Regel für Ziel „cmTC_60c57/fast“ scheiterte
+make: *** [cmTC_60c57/fast] Fehler 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_8d053/fast"
+/usr/bin/make -f CMakeFiles/cmTC_8d053.dir/build.make CMakeFiles/cmTC_8d053.dir/build
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_8d053.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -fPIC    -o CMakeFiles/cmTC_8d053.dir/CheckSymbolExists.c.o   -c /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_8d053
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8d053.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC     CMakeFiles/cmTC_8d053.dir/CheckSymbolExists.c.o  -o cmTC_8d053 -rdynamic 
+CMakeFiles/cmTC_8d053.dir/CheckSymbolExists.c.o: In Funktion `main':
+CheckSymbolExists.c:(.text+0x1b): Nicht definierter Verweis auf `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_8d053.dir/build.make:97: die Regel für Ziel „cmTC_8d053“ scheiterte
+make[1]: *** [cmTC_8d053] Fehler 1
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird verlassen
+Makefile:126: die Regel für Ziel „cmTC_8d053/fast“ scheiterte
+make: *** [cmTC_8d053/fast] Fehler 2
+
+File /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_396cc/fast"
+/usr/bin/make -f CMakeFiles/cmTC_396cc.dir/build.make CMakeFiles/cmTC_396cc.dir/build
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_396cc.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_396cc.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_396cc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_396cc.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_396cc.dir/CheckFunctionExists.c.o  -o cmTC_396cc -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_396cc.dir/build.make:97: die Regel für Ziel „cmTC_396cc“ scheiterte
+make[1]: *** [cmTC_396cc] Fehler 1
+make[1]: Verzeichnis „/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/CMakeTmp“ wird verlassen
+Makefile:126: die Regel für Ziel „cmTC_396cc/fast“ scheiterte
+make: *** [cmTC_396cc/fast] Fehler 2
+
+
