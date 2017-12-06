@@ -1,0 +1,199 @@
+Hauptseminar
+Phase 1: Ablauflogik der Evaluation
+[1]
+
+1. Formulierung von Wertekriterien
+
+Kriterien:  -Dokumentation			-Vollständig (Nutzung nur von den gegebener Dokumentation)
+									-Lesbar (Verständlichkeit der Anweisungen)
+									-Hilfreich 
+									-Umfang
+
+			-Einarbeitungszeit:		-Installation:
+									-Umsetzung der Aufgabe
+									-Fehlertoleranz
+
+
+
+2: Evaluationsziele:
+		2.1 Vegleichende Evaluation (HPX vs Kokkos)
+
+
+3.Evaluationsmethode
+		Ziel: 	-Fokusierung auf Benutzung dabei im speziellen 
+				-Analysierung hinsichtlich der Installations- und Implementierungsfreundlichkeit
+		
+		Durchführende Person:	Möglicher Benutzer des Systems mit wenig bis gar keinen Erfahrung
+								im HPC, Grundlegende Kenntnisse in Unixartigen Betriebssystemen und
+								der Programmiersprache C++
+		
+		Evaluationsort:			Ruhiger Arbeitsplatz mit wenig bis gar keinen Ablenkungenmöglichkeiten
+
+		Informationen die gesammelt werden:		-Subjekteive Einschätzung der Dokumentation
+												-Objektive Einschätzung der aufgebrachten Zeit
+
+		Metrik für Kriterium Dokumentation:		-Umfang der Installationsanweisungen (gezählt in
+													Teilschritten)
+												-Vollständig: - -2<x<+2, dabei:
+																- -2 Keine Nutzung der offiziellen
+																	Dokumentation
+																- -1 vorwiegende Nutzun von inoffiziellen Dokus
+																-  0 gleiche Nutzung von off/inoff. Dokus.
+																- +1 vorwiegende Nutzugn der off. Dokus
+																- +2 ausschließliche Nutzung von der off. Doku
+
+												-Lesbar:      	-1<x<+1
+																- -1 Vorwiegend Verständnissprobleme
+																-  0 Wenig Verständnissprobleme
+																- +1 Keine Verständnissprobleme
+
+												-Hilfreich:		- 0/1
+																- -Kaum/Gar nicht Hilfreich
+																- -Vorwiegend/komplett Hilfreich
+
+4. Tabelle für Bemerkungen währrend der Installation:
+
+	Start: 14:32
+	Runterladen: 14:40-14:52
+	Installation von prerequisites: 14:55 -15:04
+	Cmake : 15:04-15:24 cmake struggle
+	boostlib : 15:24-
+	   -fehlende Boost Libs:            boost_atomic
+								          boost_filesystem
+								          boost_regex
+								          boost_system
+		Installation von libbost 1.61: 15:29-15:31
+	15:33-15:46   Fehlendes tcmalloc, herunterladen von  libgoogle-perftools-dev
+
+	15:46 Fehlermeldung :
+
+
+
+In file included from /home/andrey/Schreibtisch/HauptS/hpx/hpx/runtime/threads/policies/topology.hpp:10:0,
+                 from /home/andrey/Schreibtisch/HauptS/hpx/src/runtime.cpp:25:
+/home/andrey/Schreibtisch/HauptS/hpx/hpx/runtime/threads/policies/hwloc_topology_info.hpp:78:30: error: ‘HWLOC_MEMBIND_REPLICATE’ was not declared in this scope
+         membind_replicate  = HWLOC_MEMBIND_REPLICATE,
+                              ^~~~~~~~~~~~~~~~~~~~~~~
+[  3%] Building CXX object src/CMakeFiles/hpx.dir/runtime/actions/detail/action_factory.cpp.o
+[  3%] Building CXX object src/CMakeFiles/hpx.dir/runtime/actions/detail/invocation_count_registry.cpp.o
+[  3%] Building CXX object src/CMakeFiles/hpx.dir/runtime/agas/addressing_service.cpp.o
+[  7%] Building CXX object src/CMakeFiles/hpx.dir/runtime/agas/big_boot_barrier.cpp.o
+src/CMakeFiles/hpx.dir/build.make:158: die Regel für Ziel „src/CMakeFiles/hpx.dir/runtime.cpp.o“ scheiterte
+make[2]: *** [src/CMakeFiles/hpx.dir/runtime.cpp.o] Fehler 1
+make[2]: *** Auf noch nicht beendete Prozesse wird gewartet …
+In file included from /home/andrey/Schreibtisch/HauptS/hpx/hpx/runtime/threads/policies/topology.hpp:10:0,
+                 from /home/andrey/Schreibtisch/HauptS/hpx/src/runtime/agas/big_boot_barrier.cpp:37:
+/home/andrey/Schreibtisch/HauptS/hpx/hpx/runtime/threads/policies/hwloc_topology_info.hpp:78:30: error: ‘HWLOC_MEMBIND_REPLICATE’ was not declared in this scope
+         membind_replicate  = HWLOC_MEMBIND_REPLICATE,
+                              ^~~~~~~~~~~~~~~~~~~~~~~
+src/CMakeFiles/hpx.dir/build.make:398: die Regel für Ziel „src/CMakeFiles/hpx.dir/runtime/agas/big_boot_barrier.cpp.o“ scheiterte
+make[2]: *** [src/CMakeFiles/hpx.dir/runtime/agas/big_boot_barrier.cpp.o] Fehler 1
+CMakeFiles/Makefile2:1819: die Regel für Ziel „src/CMakeFiles/hpx.dir/all“ scheiterte
+make[1]: *** [src/CMakeFiles/hpx.dir/all] Fehler 2
+Makefile:138: die Regel für Ziel „all“ scheiterte
+make: *** [all] Fehler 2
+
+
+	15:51-15:57 -> HWLOC master branch gepullt, neuer Versuch mit Branch v1.10
+	15:57-17:30 
+	fortführung mit inst.
+
+
+
+
+
+
+	Boostversion 1.60
+
+
+		
+	Vollständig:   -Schritte, die gefhelt haben: installation libgoogle perftools
+
+	Lesbar:  -Schritte die Fragen offen ließen: 
+
+	Umfang:
+
+
+	Allgemeine Bemerkungen, die nicht in die Metriken einzuordnen sind:
+				-	- 3 Important Statements bei Voraussetzungen
+				- 	- Widersprüchliche Anweisungen:  -clonen von git(oben)
+													 -runterladen von zip (weiter unten)
+				-Boost, und andere sachen Fehlten
+
+				-ibgoogle-perftools-dev als optional markiert bei requisites... Widerspruch zu Fehlermeldung
+
+				- failed to create symbolic link '/home/andrey/Schreibtisch/HauptS/hpx/my_hpx_build/share/hpx': No such file or directory, nach cmake
+				- viele deprecated Nachrichten
+
+
+/home/andrey/Schreibtisch/hwloc/hwloc
+
+Kokkos
+
+	bauen, um cuda zu nutzen gibt Fehlermeldung:
+	/home/andrey/Schreibtisch/Kokkos/kokkos/core/src/Cuda/Kokkos_CudaExec.hpp(397): error: The closure type for a lambda ("lambda [](int)->void", defined at heat_kokkos.cpp:130) cannot be used in the template argument type of a __global__ function template instantiation, unless the lambda is defined within a __device__ or __global__ function, or the lambda is an 'extended lambda' and the flag --expt-extended-lambda is specified
+          detected during:
+            instantiation of "Kokkos::Impl::cuda_parallel_launch_local_memory" based on template argument <Kokkos::Impl::ParallelFor<lambda [](int)->void, Kokkos::RangePolicy<Kokkos::CudaSpace::execution_space>, Kokkos::CudaSpace::execution_space>> 
+(398): here
+
+	Kokkos neu bauen mit neuer option ( nur duch --help gefunden):
+
+	./generate_makefile.bash --with-cuda-options=enable_lambda
+
+	bauen der internent tests schlägt mit Cuda-Version 9 fehl:
+		Fehlermeldung: TestViewMapping_subview.hpp:82:228: error: expansion pattern ‘int’ contains no argument packs
+		(und viele mehr)
+
+	scheinbar bekannter Fehler: https://github.com/kokkos/kokkos/issues/1190
+	--> Allerdings ist die Version 9 noch nicht unterstützt
+
+	Installationsanweisung fehlerhaft: make lib 
+										--> richtig (laut makefile) kokkoslib
+										make cuda in den Beispielen funktioniert nicht
+	Selbständiges Bauen klappt wegen fehlender KOKKOS_PATH Variable nicht (setzen in /etc/environment), in Programing Guid in Kokkos/kokkos/doc "einfaches" include von makefile.kokkos.
+			!!!! Kopieren von dem Makefile.kokkos nötig!!! Nirgends ein Verweis?!
+
+	Mehr Probleme CUDA 9.0 zu installieren als Kokkos
+
+	Trotz allem kein eig. bauen da header dateien fehlen
+	-> Nach langem hin und her Nutzung einer fertigen Build Datei eines tutorials aus kokkos-tutorials
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1] https://www.gesis.org/fileadmin/upload/forschung/publikationen/gesis_reihen/iz_arbeitsberichte/ab_29.pdf
