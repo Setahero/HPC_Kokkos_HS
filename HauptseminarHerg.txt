@@ -64,6 +64,17 @@ Kriterien:  -Dokumentation			-Vollständig (Nutzung nur von den gegebener Dokume
 								          boost_system
 		Installation von libbost 1.61: 15:29-15:31
 	15:33-15:46   Fehlendes tcmalloc, herunterladen von  libgoogle-perftools-dev
+	
+		HWLOC über Packetmanager runtergeladen aber Befehl :DHWLOC_ROOT wohl falsch (Fehlermeldung
+Could NOT find Hwloc (missing: HWLOC_LIBRARY HWLOC_INCLUDE_DIR) 
+CMake Error at cmake/HPX_Message.cmake:43 (message):
+  ERROR: Hwloc could not be found and HPX_WITH_HWLOC=ON, please specify
+  HWLOC_ROOT to point to the correct location or set HPX_WITH_HWLOC to OFF
+Call Stack (most recent call first):
+  CMakeLists.txt:1504 (hpx_error)
+) FIX---> https://github.com/STEllAR-GROUP/hpx/issues/2524
+	Befehl in -DHPX_WITH_MALLOC abändern
+		
 
 	15:46 Fehlermeldung :
 
