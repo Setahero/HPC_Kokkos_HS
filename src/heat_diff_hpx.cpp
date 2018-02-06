@@ -86,23 +86,31 @@ int hpx_main(boost::program_options::variables_map& vm){
 	//	Setting clock for measurment	//
     std::uint64_t past = hpx::util::high_resolution_clock::now();
 
+    
+
 	for (auto i = 1; i <= iteration; ++i)
 	{
 		//	Swapping vectors after each round of iteration 	//
 
 	    std::swap(array,array_new);
 
-	    for (auto i = 0; i <= x-1; ++i)
-	    {
+	   // for (auto i = 0; i <= x-1; ++i)
+	    //{
 	    	f = hpx::parallel::v2::for_loop(
-	    		p, 0, y,
-	    		[&i, &array, &array_new] (int j){
-			array_new[i][j] = array[i][j] + computeNewNode(array,i,j)* dt * k;
+	    		p, 0, x,
+	    		[&array, &array_new] (int i){
+			//array_new[i][j] = array[i][j] + computeNewNode(array,i,j)* dt * k;
+				for (int j = 0; j < y; ++j)
+				{
+					array_new[i][j] = array[i][j] + computeNewNode(array,i,j)* dt * k;	
+				}
 	    	});
 	    	f.get();
-	    }
+	    //}
 
 	}
+
+
 
 	//	Calculating computing time 	//
 	std::uint64_t elapsed = hpx::util::high_resolution_clock::now() - past;

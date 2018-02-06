@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/andrey/Schreibtisch/Wärmeleitgleichung/src/heat_diff_hpx.cpp" "/home/andrey/Schreibtisch/Wärmeleitgleichung/src/CMakeFiles/heat_exe.dir/heat_diff_hpx.cpp.o"
+  "/home/andrey/Schreibtisch/Hauptseminar/refactored-broccoli/src/heat_diff_hpx.cpp" "/home/andrey/Schreibtisch/Hauptseminar/refactored-broccoli/src/CMakeFiles/heat_exe.dir/heat_diff_hpx.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -13,17 +13,13 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "HPX_APPLICATION_EXPORTS"
   "HPX_APPLICATION_NAME=heat_exe"
   "HPX_APPLICATION_STRING=\"heat_exe\""
-  "HPX_PREFIX=\"/home/andrey/Schreibtisch/HauptS/my_hpx_build\""
+  "HPX_PREFIX=\"/usr/local\""
   )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/usr/local/cuda-9.0/include"
-  "/home/andrey/Schreibtisch/HauptS/hpx"
-  "/home/andrey/Schreibtisch/HauptS/my_hpx_build"
-  "/home/andrey/Schreibtisch/HauptS/hpx/examples"
-  "/home/andrey/Schreibtisch/HauptS/hpx/tests"
   "/usr/local/include"
+  "/usr/local/include/hpx/external"
   )
 
 # Targets to which this target links.

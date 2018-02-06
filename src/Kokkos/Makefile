@@ -1,44 +1,10 @@
-KOKKOS_DEVICES = "Cuda"
-EXE_NAME = "heat_kokkos"
-##KOKKOS_PATH = /home/andrey/Schreibtisch/build_kokkos/install
-SRC = $(wildcard *.cpp)
+KOKKOS_SETTINGS=KOKKOS_SRC_PATH=/home/andrey/Schreibtisch/kokkos CXX=/home/andrey/Schreibtisch/kokkos/bin/nvcc_wrapper KOKKOS_DEVICES=Serial,OpenMP KOKKOS_ARCH=Kepler30 GTEST_PATH=/home/andrey/Schreibtisch/kokkos/tpls/gtest KOKKOS_PATH=/home/andrey/Schreibtisch/kokkos_build/install
 
-default: build
-	echo "Start Build"
+all:
+	$(MAKE) -f /home/andrey/Schreibtisch/Hauptseminar/refactored-broccoli/src/Kokkos/build/Makefile KOKKOS_SRC_PATH=/home/andrey/Schreibtisch/kokkos CXX=/home/andrey/Schreibtisch/kokkos/bin/nvcc_wrapper KOKKOS_DEVICES=Cuda,Serial,OpenMP KOKKOS_ARCH=Kepler30 CUDA_PATH=/usr/local/cuda-9.0 GTEST_PATH=/home/andrey/Schreibtisch/kokkos/tpls/gtest KOKKOS_CUDA_OPTIONS=enable_lambda,force_uvm KOKKOS_PATH=/home/andrey/Schreibtisch/kokkos_build/install
 
+test: all
+	$(MAKE) -f /home/andrey/Schreibtisch/Hauptseminar/refactored-broccoli/src/Kokkos/build/Makefile KOKKOS_SRC_PATH=/home/andrey/Schreibtisch/kokkos CXX=/home/andrey/Schreibtisch/kokkos/bin/nvcc_wrapper KOKKOS_DEVICES=Cuda,Serial,OpenMP KOKKOS_ARCH=Kepler30 CUDA_PATH=/usr/local/cuda-9.0 GTEST_PATH=/home/andrey/Schreibtisch/kokkos/tpls/gtest KOKKOS_CUDA_OPTIONS=enable_lambda,force_uvm KOKKOS_PATH=/home/andrey/Schreibtisch/kokkos_build/install test
 
-ifneq (,$(findstring Cuda,$(KOKKOS_DEVICES)))
-CXX = $(KOKKOS_PATH)/config/nvcc_wrapper
-EXE = ${EXE_NAME}.cuda
-#KOKKOS_ARCH = "SNB,Kepler30"
-KOKKOS_CUDA_OPTIONS = "enable_lambda"
-else
-CXX = g++
-EXE = ${EXE_NAME}.host
-KOKKOS_ARCH = "SNB"
-endif
-
-boost = -lboost_program_options
-CXXFLAGS = -O3 -march=native
-LINK = ${CXX}
-LINKFLAGS =  
-
-DEPFLAGS = -M
-
-OBJ = $(SRC:.cpp=.o)
-LIB =
-
-include $(KOKKOS_PATH)/Makefile.kokkos
-
-build: $(EXE)
-
-$(EXE): $(OBJ) $(KOKKOS_LINK_DEPENDS)
-	$(LINK) $(KOKKOS_LDFLAGS) $(LINKFLAGS) $(EXTRA_PATH) $(OBJ) $(KOKKOS_LIBS) $(LIB) $(boost) -o $(EXE)
-
-clean: kokkos-clean 
-	rm -f *.o *.cuda *.host
-
-# Compilation rules
-
-%.o:%.cpp $(KOKKOS_CPP_DEPENDS)
-	$(CXX) $(KOKKOS_CPPFLAGS) $(KOKKOS_CXXFLAGS) $(CXXFLAGS) $(boost) $(EXTRA_INC) -c $<
+clean:
+	$(MAKE) -f /home/andrey/Schreibtisch/Hauptseminar/refactored-broccoli/src/Kokkos/build/Makefile KOKKOS_SRC_PATH=/home/andrey/Schreibtisch/kokkos CXX=/home/andrey/Schreibtisch/kokkos/bin/nvcc_wrapper KOKKOS_DEVICES=Cuda,Serial,OpenMP KOKKOS_ARCH=Kepler30 CUDA_PATH=/usr/local/cuda-9.0 GTEST_PATH=/home/andrey/Schreibtisch/kokkos/tpls/gtest KOKKOS_CUDA_OPTIONS=enable_lambda,force_uvm KOKKOS_PATH=/home/andrey/Schreibtisch/kokkos_build/install clean
